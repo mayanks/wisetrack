@@ -1,0 +1,60 @@
+database
+--------
+
+accounts
+ - bank name
+ - account number
+ - branch
+ - online login id
+ - starting balance
+
+
+transaction
+ - debit_from
+ - credit_to
+ - category
+ - amount
+
+
+categories
+ - income
+ - interests
+ - taxes
+ - insurance
+   - health
+   - life
+ - entertainment
+   - eating out
+   - movie
+   - vacation
+   - TV
+ - clothings
+ - house-hold
+   - grocery
+   - vegetables
+   - maintenance
+   - maid salary
+   - cook salary
+   - newspaper
+   - milk+curds
+ - car
+   - petrol
+   - servicing
+   - other
+ - health
+   - medicines
+   - doctor
+ - travel
+   - train
+   - flight
+   - others
+ - investment
+   - property
+   - shares
+   - mutual funds
+   - gold
+   - long-term-plans 
+ - kids
+   - toys
+ - gifts
+ - transfer

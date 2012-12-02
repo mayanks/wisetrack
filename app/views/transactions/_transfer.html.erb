@@ -1,0 +1,22 @@
+<div id="new-transfer" class="modal" style="display:none;">
+  <form action="/transactions/transfer" method="post" class="form-inline">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&#215;</a>
+      <h3>Transfer</h3>
+    </div>
+    <div class="modal-body">
+      <%= raw select_tag 'debit_from_id', options_from_collection_for_select(Account.all, "id", "name"), {:prompt => "-- From --",:class => "input-small"} %>
+      <%= select_tag :credit_to_id, options_from_collection_for_select(Account.all, "id", "name"), {:prompt => "-- To --",:class => "input-small"}%>
+      <div class="input-prepend">
+        <span class="add-on">Rs.</span>
+        <%= text_field_tag :amount, "", :placeholder => "Amount" , :class => "input-small"%>
+      </div>
+      <%= text_field_tag :on , "", :class => "calendar input-small", 'data-date' => Date.today.strftime("%d-%m-%Y"), 'data-date-format' => "dd-mm-yyyy", :placeholder => "Date"%>
+    </div>
+
+    <div class="modal-footer">
+      <%= submit_tag :submit, :class => "btn btn-info" %>
+      <a class="btn" data-dismiss="modal" href="#">Close</a>
+    </div>
+  </form>
+</div>

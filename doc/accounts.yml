@@ -1,0 +1,55 @@
+accounts:
+ - wallet: 
+     name: Wallet
+     number: 0
+     branch: Home
+     ac_type: current
+     balance: 5000
+ - icici-mg-road:
+     name: ICICI MG Road
+     number: 000201017256
+     branch: MG Road
+     ac_type: savings
+     balance: 33529
+ - icici-jayanagar:
+     name: ICICI Jayanagar
+     number: 005301016486
+     branch: Jayanagar
+     ac_type: savings
+     balance: 3824
+ - hdfc:
+     name: HDFC
+     number: 03434324234
+     branch: JP Nagar
+     ac_type: savings
+     balance: 32069
+ - scb:
+     name: Standard Charted - Savings
+     number: 45505099099
+     branch: Koramangala
+     ac_type: savings
+     balance: 204895
+ - home-loan:
+     name: Standard Charted - Loan
+     number: 45505099099
+     branch: Koramangala
+     ac_type: loan
+     balance: -299403
+ - credit-card:
+     name: ICICI Credit Card
+     number: 4629864396007009
+     branch: MG Road
+     ac_type: credit-card
+     balance: -19899
+ - icici-direct:
+     name: ICICI Demat
+     number: 0005xxxxxx
+     branch: Jayanagar
+     ac_type: investment
+     balance: 1168763
+ - sbi-pf: 
+     name: SBI PF 
+     number: 3434343
+     branch: JP Nagar
+     ac_type: investment
+     balance: 100000

@@ -1,0 +1,35 @@
+<div class="account-container">
+	<div class="content clearfix">
+    <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => {}) do |f| %>
+		
+      <h1>Resend confirmation instructions</h1>
+			
+			<div class="login-fields">
+				
+				<p>Enter email address used while sign-up:</p>
+				
+				<div class="field">
+					<label for="user_email">Email Address:</label>
+					<input type="email" id="user_email" name="user[email]" value="" placeholder="Email Address" class="login username-field" autofocus="autofocus" />
+				</div> <!-- /field -->
+				
+			</div> <!-- /login-fields -->
+			
+			<div class="login-actions">
+				
+				<button class="button btn btn-warning btn-large">Resend confirmation instructions</button>
+				
+			</div> <!-- .actions -->
+			
+    <%- end -%>
+		
+	</div> <!-- /content -->
+	
+</div> <!-- /account-container -->
+
+
+<!-- Text Under Box -->
+<div class="login-extra">
+</div> <!-- /login-extra -->
+
+

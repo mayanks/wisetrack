@@ -1,0 +1,24 @@
+<div id="new-transaction" class="modal" style="display:none;">
+  <%= simple_form_for(@transaction) do |f| %>
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&#215;</a>
+      <h3>Transaction</h3>
+    </div>
+    <div class="modal-body">
+      <%= f.error_notification %>
+
+      <%= f.input :amount %>
+      <%= f.association :debit_from %>
+      <%= f.association :credit_to %>
+      <%= f.association :category %>
+      <%= f.input :description %>
+      <%= f.input :duration %>
+      <%= f.input :on %>
+    </div>
+
+    <div class="modal-footer">
+      <%= f.button :submit, :class => "btn" %>
+      <a class="btn" data-dismiss="modal" href="#">Close</a>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,26 @@
+<div id="new-expense" class="modal" style="display:none;">
+  <%- transaction.t_type = Transaction::TYPE_DEBIT -%>
+  <%= form_for(transaction, {:html => {:class => "form-inline"}}) do |f| %>
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&#215;</a>
+      <h3>Expense</h3>
+    </div>
+    <div class="modal-body">
+      <%= f.text_field :date , :class => "calendar input-small", 'data-date' => Date.today.strftime("%d-%m-%Y"), 'data-date-format' => "dd-mm-yyyy", :placeholder => "Date"%>
+      <div class="input-prepend">
+        <span class="add-on">Rs.</span>
+        <%= f.text_field :amount, :placeholder => "Amount" , :class => "input-small"%>
+      </div>
+      <%= f.select :account_id, ["-- From --"] + Account.all.collect{|p| [p.name, p.id]}, {}, { :class => "input-small"} %>
+      <%= f.hidden_field :t_type%>
+      <%= f.select :category_id, ["-- Type --"] + Category.all.collect{|p| [p.category.nil? ? p.name.titleize : " - " + p.name.titleize, p.id]} , {}, {:class => "input-small"}%>
+      <%# f.select :category_id, ["-- Type --"] + Category.expense_categories.collect{|p| [p.name.titleize, p.id]} , {}, {:class => "input-small"}%>
+      <%= f.text_field :description, :placeholder => "Description" %>
+    </div>
+
+    <div class="modal-footer">
+      <%= f.button :submit, :class => "btn btn-info" %>
+      <a class="btn" data-dismiss="modal" href="#">Close</a>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,38 @@
+<ul class="mainnav">
+  <li class="<%= 'active' if controller.controller_name == 'dashboard' %>">
+  <a href="/">
+    <i class="icon-dashboard"></i>
+    <span>Home</span>
+  </a>	    				
+  </li>
+
+  <li class="<%= 'active' if controller.controller_name == 'accounts' %>">
+  <a href="/accounts">
+    <i class="icon-briefcase"></i>
+    <span>Accounts</span>
+  </a>  									
+  </li>
+
+  <li class="<%= 'active' if controller.controller_name == 'transactions' %>">
+  <a href="/transactions">
+    <i class="icon-money"></i>
+    <span>Transactions</span>
+  </a>	    				
+  </li>
+
+  <li class="<%= 'active' if controller.controller_name == 'category' %>">
+  <a href="/categories">
+    <i class="icon-bar-chart"></i>
+    <span>Categories</span>
+  </a>    				
+  </li>
+
+  <li class="<%= 'active' if controller.controller_name == 'users' %>">
+  <a href="/users">
+    <i class="icon-user"></i>
+    <span>Admin</span>
+  </a>	  				
+  </li>
+
+</ul>
+

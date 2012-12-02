@@ -1,0 +1,23 @@
+<div class="widget widget-table action-table">
+  <div class="widget-header">
+    <i class="icon-facetime-video"></i>
+    <h3>Categories</h3>
+  </div>
+  <div id="categories" class="widget-content">
+    <table class="table table-bordered table-stripped">
+      <thead>
+        <th>Category</th>
+        <th>Sub-Category</th>
+      </thead>
+      <tbody>
+        <%- @categories.each do |c| -%>
+          <tr>
+            <td><span class="label"><%= c.name %></span> </td>
+            <td><%= raw c.categories.map{|a| content_tag(:span,a.name,:class => "label label-info")}.join(" ") %></td>
+          </tr>
+        <%- end -%>
+      </tbody>
+    </table>
+  </div>  
+</div>  
+

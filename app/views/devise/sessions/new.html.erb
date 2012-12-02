@@ -1,0 +1,70 @@
+<div class="account-container">
+	<div class="content clearfix">
+    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+		
+			<h1>Sign In</h1>		
+			
+			<div class="login-fields">
+				
+				<p>Sign in using your registered account:</p>
+				
+				<div class="field">
+					<label for="user_email">Email Address:</label>
+					<input type="email" id="user_email" name="user[email]" value="" placeholder="Email Address" class="login username-field" autofocus="autofocus" />
+				</div> <!-- /field -->
+				
+				<div class="field">
+					<label for="user_password">Password:</label>
+					<input type="password" id="user_password" name="user[password]" value="" placeholder="Password" class="login password-field"/>
+				</div> <!-- /password -->
+				
+			</div> <!-- /login-fields -->
+			
+      <!--
+      <div class="control-group email optional">
+        <label class="email optional control-label" for="user_email">Email</label>
+        <div class="controls">
+          <input autofocus="autofocus" class="string email optional" id="user_email" name="user[email]" size="50" type="email" value="" />
+        </div>
+      </div>
+      <div class="control-group password optional">
+        <label class="password optional control-label" for="user_password">Password</label>
+        <div class="controls">
+          <input class="password optional" id="user_password" name="user[password]" size="50" type="password" />
+        </div>
+      </div>
+      <div class="control-group boolean optional">
+        <label class="boolean optional control-label" for="user_remember_me">Remember me</label>
+        <div class="controls">
+          <input name="user[remember_me]" type="hidden" value="0" />
+          <label class="checkbox"><input class="boolean optional" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1" /> </label>
+        </div>
+      </div>
+      -->
+			<div class="login-actions">
+				
+				<span class="login-checkbox">
+          <input name="user[remember_me]" type="hidden" value="0" />
+					<input id="user_remember_me" name="user[remember_me]" type="checkbox" class="field login-checkbox" value="1" tabindex="4" />
+					<label class="choice" for="user_remember_me">Keep me signed in</label>
+				</span>
+									
+				<button class="button btn btn-warning btn-large">Sign In</button>
+				
+			</div> <!-- .actions -->
+			
+    <%- end -%>
+		
+	</div> <!-- /content -->
+	
+</div> <!-- /account-container -->
+
+
+<!-- Text Under Box -->
+<div class="login-extra">
+	<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+	  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+	<% end -%>
+</div> <!-- /login-extra -->
+
+

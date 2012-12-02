@@ -1,0 +1,57 @@
+<div class="widget widget-table action-table">
+  <div class="widget-header">
+    <div class="row">
+      <div class="span3">
+        <i class="icon-money"></i>
+        <h3>Transactions</h3>
+      </div>
+      <div class="span1">
+        <a data-toggle="modal" href="#new-income" class="btn btn-info" type="button">Income</a>
+        <%= render :partial => "income", :locals => {:transaction => @transaction} %>
+      </div>
+      <div class="span1">
+        <a data-toggle="modal" href="#new-transfer" class="btn btn-info" type="button">Transfer</a>
+        <%= render :partial => "transfer", :locals => {:transaction => @transaction} %>
+      </div>
+      <div class="span1">
+        <a data-toggle="modal" href="#new-expense" class="btn btn-info" type="button">Expense</a>
+        <%= render :partial => "expense", :locals => {:transaction => @transaction} %>
+      </div>
+    </div>
+  </div>
+  <div id="transactions" class="widget-content">
+    <table class="table table-bordered table-stripped">
+      <thead>
+        <th>S.No</th>
+        <th>Account</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Sub Category</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Balance</th>
+      </tr>
+
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td></td>
+          <td><%= transaction.account.name %></td>
+          <td><%= transaction.date %></td>
+          <td><%= transaction.description %></td>
+          <td><%= transaction.category.category.nil? ? transaction.category.name : transaction.category.category.name %></td>
+          <td><%= transaction.category.name %></td>
+          <td>
+            <%- if transaction.t_type == Transaction::TYPE_CREDIT %>
+              <span class="label label-success">Credit</label>
+            <%- else -%>
+              <span class="label label-warning">Debit</label>
+            <%- end -%>
+          </td>
+          <td><%=rs transaction.amount %></td>
+          <td><%=rs transaction.balance %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
