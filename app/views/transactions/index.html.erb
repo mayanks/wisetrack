@@ -7,15 +7,15 @@
       </div>
       <div class="span1">
         <a data-toggle="modal" href="#new-income" class="btn btn-info" type="button">Income</a>
-        <%= render :partial => "income", :locals => {:transaction => @transaction} %>
+        <%= render :partial => "/transactions/income", :locals => {:transaction => @transaction} %>
       </div>
       <div class="span1">
         <a data-toggle="modal" href="#new-transfer" class="btn btn-info" type="button">Transfer</a>
-        <%= render :partial => "transfer", :locals => {:transaction => @transaction} %>
+        <%= render :partial => "/transactions/transfer", :locals => {:transaction => @transaction} %>
       </div>
       <div class="span1">
         <a data-toggle="modal" href="#new-expense" class="btn btn-info" type="button">Expense</a>
-        <%= render :partial => "expense", :locals => {:transaction => @transaction} %>
+        <%= render :partial => "/transactions/expense", :locals => {:transaction => @transaction} %>
       </div>
     </div>
   </div>
