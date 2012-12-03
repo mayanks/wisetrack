@@ -29,6 +29,7 @@ categories:
  - health:
    - medicines
    - doctor
+   - tests
  - travel:
    - train
    - flight
@@ -42,5 +43,13 @@ categories:
  - kids:
    - toys
  - gifts:
+ - well-being:
+   - clothings
+   - jewellery
+   - parlor
  - transfer:
+ - utility: 
+   - electricity
+   - phone+internet
+   - gas
  - others:
