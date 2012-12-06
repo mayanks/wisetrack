@@ -7,14 +7,34 @@
     <table class="table table-bordered table-stripped">
       <thead>
         <th>Category</th>
-        <th>Sub-Category</th>
+        <th>Expense this Month</th>
+        <th>Expense last 3 months</th>
+        <th>Expense this year</th>
       </thead>
       <tbody>
-        <%- @categories.each do |c| -%>
+        <%- Category.expense_categories.each do |c| -%>
           <tr>
-            <td><span class="label"><%= c.name %></span> </td>
-            <td><%= raw c.categories.map{|a| content_tag(:span,a.name,:class => "label label-info")}.join(" ") %></td>
+            <td>
+              <a href="#category_<%=c.id%>" class="category-tree">
+                <i class="badge icon icon-plus"></i>
+              </a>
+              <%# link_to_function(raw("<i class='badge icon icon-plus'></i>"),"$('.category_#{c.id}').slideToggle('slow');$(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus')") %>
+              <span class="label"><%= c.name %></span> 
+            </td>
+            <td><%=rs c.expense_this_month %></td>
+            <td><%=rs c.expense_last_3_months %></td>
+            <td><%=rs c.expense_this_year %></td>
           </tr>
+          <tbody id="category_<%=c.id%>" style="display:none;">
+            <% c.categories.each do |subc| %>
+              <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-info"><%= subc.name %></span> </td>
+                <td><%=rs subc.expense_this_month %></td>
+                <td><%=rs subc.expense_last_3_months %></td>
+                <td><%=rs subc.expense_this_year %></td>
+              </tr>
+            <%- end -%> 
+          </tbody>
         <%- end -%>
       </tbody>
     </table>

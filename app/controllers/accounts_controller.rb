@@ -14,7 +14,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1.json
   def show
     @account = Account.find(params[:id])
-    @transactions = @account.transactions
+    @transactions = @account.transactions.reverse
     @transaction = Transaction.new
 
     respond_to do |format|

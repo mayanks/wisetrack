@@ -3,4 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready( ->
   $('.calendar').datepicker()
+
+  $('.category-tree').on('click', (e) ->
+    e.stopPropagation();
+    e.preventDefault();
+    $($(this).attr('href')).slideToggle()
+    $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus')
+  )
 )

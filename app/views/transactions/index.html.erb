@@ -37,7 +37,7 @@
         <tr>
           <td></td>
           <td><%= transaction.account.name %></td>
-          <td><%= transaction.date %></td>
+          <td><%=l transaction.date %></td>
           <td><%= transaction.description %></td>
           <td><%= transaction.category.category.nil? ? transaction.category.name : transaction.category.category.name %></td>
           <td><%= transaction.category.name %></td>
