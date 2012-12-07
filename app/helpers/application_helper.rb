@@ -24,4 +24,15 @@ module ApplicationHelper
       end
     end
   end
+
+  def expense_category_options
+    options = []
+    Category.expense_categories.each do |c| 
+      options << [c.name.titleize, c.id]
+      c.categories.each do |subc|
+        options << [" - " + subc.name.titleize, subc.id]
+      end
+    end
+    return options
+  end
 end

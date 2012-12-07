@@ -13,7 +13,7 @@
       </div>
       <%= f.select :account_id, ["-- From --"] + Account.all.collect{|p| [p.name, p.id]}, {}, { :class => "input-small"} %>
       <%= f.hidden_field :t_type%>
-      <%= f.select :category_id, ["-- Type --"] + Category.all.collect{|p| [p.category.nil? ? p.name.titleize : " - " + p.name.titleize, p.id]} , {}, {:class => "input-small"}%>
+      <%= f.select :category_id, ["-- Type --"] + expense_category_options, {}, {:class => "input-small"}%>
       <%# f.select :category_id, ["-- Type --"] + Category.expense_categories.collect{|p| [p.name.titleize, p.id]} , {}, {:class => "input-small"}%>
       <%= f.text_field :description, :placeholder => "Description" %>
     </div>
