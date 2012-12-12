@@ -1,8 +1,10 @@
 class TransactionsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all(:order => "id desc")
+    valid_account_ids = current_user.accounts.map{|a|a.id}
+    @transactions = Transaction.all(:order => "id desc", :conditions => ["account_id in (?)", valid_account_ids], :include => [:account, :category])
     @transaction = Transaction.new
 
     respond_to do |format|

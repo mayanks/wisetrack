@@ -2,6 +2,7 @@ class Account < ActiveRecord::Base
   attr_accessible :balance, :branch, :name, :number, :ac_type
   validates_presence_of :name, :branch, :number
 
+  has_and_belongs_to_many :users
   has_many :transactions, :order => "date, created_at"
 
   def closing_balance(on = nil)

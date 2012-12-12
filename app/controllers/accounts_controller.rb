@@ -1,8 +1,9 @@
 class AccountsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = current_user.accounts.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,7 +43,7 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(params[:account])
+    @account = current_user.accounts.new(params[:account])
 
     respond_to do |format|
       if @account.save
