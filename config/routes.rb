@@ -6,7 +6,7 @@ BlackSwan::Application.routes.draw do
   authenticated :user do
     root :to => 'home#index'
   end
-  root :to => "home#index"
+  root :to => "home#landing"
   devise_for :users
   resources :users
   match "/categories", :to => "category#index"
