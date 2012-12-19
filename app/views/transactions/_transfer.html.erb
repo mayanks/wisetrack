@@ -1,5 +1,5 @@
 <div id="new-transfer" class="modal" style="display:none;">
-  <form action="/transactions/transfer" method="post" class="form-inline">
+  <%= form_for(transaction, {:url => transactions_transfer_path, :html => {:class => "form-inline"}}) do |f| %>
     <div class="modal-header">
       <a class="close" data-dismiss="modal">&#215;</a>
       <h3>Transfer</h3>
@@ -15,8 +15,8 @@
     </div>
 
     <div class="modal-footer">
-      <%= submit_tag :submit, :class => "btn btn-info" %>
+      <%= f.button :submit, :class => "btn btn-info" %>
       <a class="btn" data-dismiss="modal" href="#">Close</a>
     </div>
-  </form>
+  <% end %>
 </div>
