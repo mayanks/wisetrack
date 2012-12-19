@@ -6,6 +6,7 @@ class TransactionsController < ApplicationController
     valid_account_ids = current_user.accounts.map{|a|a.id}
     @transactions = Transaction.all(:order => "id desc", :conditions => ["account_id in (?)", valid_account_ids], :include => [:account, :category])
     @transaction = Transaction.new
+    @current_date = Date.today
 
     respond_to do |format|
       format.html # index.html.erb
@@ -57,8 +58,8 @@ class TransactionsController < ApplicationController
   end
 
   def transfer
-    from_account = Account.find_by_id(params[:debit_from_id])
-    to_account = Account.find_by_id(params[:credit_to_id])
+    from_account = current_user.accounts.find_by_id(params[:debit_from_id])
+    to_account = current_user.accounts.find_by_id(params[:credit_to_id])
     amount = params[:amount].to_i if params[:amount]
     date = params[:on].to_date if params[:on]
     category = Category.find_by_name('transfer')
@@ -67,6 +68,8 @@ class TransactionsController < ApplicationController
       t1 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_DEBIT, :account_id => from_account.id, :category_id => category.id, :description => params[:description], :date => date)
       t2 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_CREDIT, :account_id => to_account.id, :category_id => category.id, :description => params[:description], :date => date)
     end
+
+    redirect_to transactions_path
   end
 
   # PUT /transactions/1
