@@ -18,9 +18,9 @@ module ApplicationHelper
   def rs(a)
     if a
       if a < 0
-        content_tag(:span,"Rs. -" + stringify_amount(-a),:class => "negative money")
+        content_tag(:span,raw("&#8377; -" + stringify_amount(-a)),:class => "negative money")
       else
-        content_tag(:span,"Rs. " + stringify_amount(a),:class => "money")
+        content_tag(:span,raw("&#8377; " + stringify_amount(a)),:class => "money")
       end
     end
   end
