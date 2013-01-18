@@ -15,23 +15,36 @@
       </thead>
       <tbody>
         <%- balance = 0 %>
-        <%- @accounts.each do |account| -%>
+        <tr><td colspan=5>Saving Accounts</td></tr>
+        <%- @saving_accounts.each do |account| -%>
           <%- balance += account.closing_balance -%>
-          <tr>
-            <td><%= link_to(account.name,account) %></td>
-            <td><%= account.number %></td>
-            <td><%= account.branch %></td>
-            <td><%= account.ac_type %></td>
-            <td><%= rs account.closing_balance %></td>
-          </tr>
+          <%= render :partial => "account", :locals => {:account => account} %>
         <%- end -%>
         <tr>
-          <td>Total</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><%=rs(balance)%></td>
+          <td colspan=4><b>Total</b></td>
+          <td><b><%=rs(balance)%></b></td>
         </tr>
+
+        <tr><td colspan=5>Debt Accounts</td></tr>
+        <%- @debt_accounts.each do |account| -%>
+          <%- balance += account.closing_balance -%>
+          <%= render :partial => "account", :locals => {:account => account} %>
+        <%- end -%>
+        <tr>
+          <td colspan=4><b>Total</b></td>
+          <td><b><%=rs(balance)%></b></td>
+        </tr>
+
+        <tr><td colspan=5>Investment Accounts</td></tr>
+        <%- @investment_accounts.each do |account| -%>
+          <%- balance += account.closing_balance -%>
+          <%= render :partial => "account", :locals => {:account => account} %>
+        <%- end -%>
+        <tr>
+          <td colspan=4><b>Total</b></td>
+          <td><b><%=rs(balance)%></b></td>
+        </tr>
+
       </tbody>
     </table>
   </div>

@@ -5,6 +5,10 @@ class AccountsController < ApplicationController
   def index
     @accounts = current_user.accounts.all
 
+    @saving_accounts = current_user.accounts.all(:conditions => ["ac_type = 'savings' or ac_type = 'current'"])
+    @debt_accounts = current_user.accounts.all(:conditions => ["ac_type = 'credit-card' or ac_type = 'loan'"])
+    @investment_accounts = current_user.accounts.all(:conditions => ["ac_type = 'investment'"])
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @accounts }
