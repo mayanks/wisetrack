@@ -1,7 +1,8 @@
 BlackSwan::Application.routes.draw do
   resources :transactions
-
-  resources :accounts
+  resources :accounts do 
+    resources :transactions
+  end
 
   authenticated :user do
     root :to => 'home#index'

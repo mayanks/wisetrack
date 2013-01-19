@@ -8,3 +8,24 @@
   color: red;
 }
 a.category-tree:hover {text-decoration:none;}
+.add-transaction-container .tab-content {
+  background-color: white;
+  border-bottom: 1px solid #DDD;
+  border-left: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+}
+.add-transaction-container .nav {
+  margin-bottom: 0px;
+}
+.add-transaction-container .tab-content {
+  padding: 4px;
+}
+.side-form .controls{
+  margin-left: 100px;
+}
+.side-form .control-label{
+  width: 80px;
+}
+.side-form .control-group {
+  margin-bottom: 4px;
+}

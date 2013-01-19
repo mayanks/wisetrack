@@ -1,6 +1,10 @@
 class Account < ActiveRecord::Base
   attr_accessible :balance, :branch, :name, :number, :ac_type
   validates_presence_of :name, :branch, :number
+  scope :saving_accounts, where(["ac_type = 'savings' or ac_type = 'current'"])
+  scope :debt_accounts, where(["ac_type = 'credit-card' or ac_type = 'loan'"])
+  scope :investment_accounts, where(["ac_type = 'investment'"])
+  scope :current_accounts, where(["ac_type = 'current'"])
 
   has_and_belongs_to_many :users
   has_many :transactions, :order => "date, created_at"

@@ -3,9 +3,15 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    valid_account_ids = current_user.accounts.map{|a|a.id}
-    @transactions = Transaction.all(:order => "id desc", :conditions => ["account_id in (?)", valid_account_ids], :include => [:account, :category])
-    @transaction = Transaction.new
+    #valid_account_ids = current_user.accounts.map{|a|a.id}
+    if params[:account_id]
+      @account = current_user.accounts.find(params[:account_id])
+    else
+      @account = current_user.accounts.current_accounts.first
+    end
+
+    @transactions = @account.transactions.all(:order => "date desc", :include => [:account, :category])
+    @transaction = Transaction.new(:date => Date.today, :account_id => @account.id)
     @current_date = Date.today
 
     respond_to do |format|
@@ -48,7 +54,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to transactions_path, notice: 'Transaction was successfully created.' }
+        format.html { redirect_to account_transactions_path(@transaction.account), notice: 'Transaction was successfully created.' }
         format.json { render json: @transaction, status: :created, location: @transaction }
       else
         format.html { render action: "new" }
@@ -69,7 +75,7 @@ class TransactionsController < ApplicationController
       t2 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_CREDIT, :account_id => to_account.id, :category_id => category.id, :description => params[:description], :date => date)
     end
 
-    redirect_to transactions_path
+    redirect_to account_transactions_path(to_account)
   end
 
   # PUT /transactions/1
