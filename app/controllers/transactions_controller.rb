@@ -71,8 +71,8 @@ class TransactionsController < ApplicationController
     category = Category.find_by_name('transfer')
 
     if amount > 0 and date
-      t1 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_DEBIT, :account_id => from_account.id, :category_id => category.id, :description => params[:description], :date => date)
-      t2 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_CREDIT, :account_id => to_account.id, :category_id => category.id, :description => params[:description], :date => date)
+      t1 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_DEBIT, :account_id => from_account.id, :category_id => category.id, :description => "Transferring to #{to_account.name}", :date => date)
+      t2 = Transaction.create(:amount => amount, :t_type => Transaction::TYPE_CREDIT, :account_id => to_account.id, :category_id => category.id, :description => "Transferred from #{from_account.name}", :date => date)
     end
 
     redirect_to account_transactions_path(to_account)
