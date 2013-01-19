@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
       @account = current_user.accounts.current_accounts.first
     end
 
-    @transactions = @account.transactions.all(:order => "date desc", :include => [:account, :category])
+    @transactions = Transaction.where(:account_id => @account.id).order("date desc, created_at desc")
     @transaction = Transaction.new(:date => Date.today, :account_id => @account.id)
     @current_date = Date.today
 
