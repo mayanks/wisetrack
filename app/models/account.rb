@@ -5,6 +5,7 @@ class Account < ActiveRecord::Base
   scope :debt_accounts, where(["ac_type = 'credit-card' or ac_type = 'loan'"])
   scope :investment_accounts, where(["ac_type = 'investment'"])
   scope :current_accounts, where(["ac_type = 'current'"])
+  scope :expense_accounts, where(["ac_type = 'savings' or ac_type = 'current' or ac_type = 'credit-card'"])
 
   has_and_belongs_to_many :users
   has_many :transactions, :order => "date, created_at"
