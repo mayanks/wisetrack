@@ -33,7 +33,10 @@
               <div class="control-group">
                 <%= f.label :date, "Date", :class => "control-label" %>
                 <div class="controls">
-                  <%= f.text_field :date , :class => "calendar input-small" %>
+                  <div class="input-append date calendar" data-date="<%= @transaction.date.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+                    <input class="calendar input-small" id="transaction_date" name="transaction[date]" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
                 </div>
               </div>
 
@@ -79,7 +82,10 @@
               <div class="control-group">
                 <%= f.label :date, "Date", :class => "control-label" %>
                 <div class="controls">
-                  <%= f.text_field :date , :class => "calendar input-small"%>
+                  <div class="input-append date calendar" data-date="<%= @transaction.date.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+                    <input class="calendar input-small" id="transaction_date" name="transaction[date]" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
                 </div>
               </div>
 
@@ -124,7 +130,10 @@
               <div class="control-group">
                 <%= label_tag :on, "Date", :class => "control-label" %>
                 <div class="controls">
-                  <%= text_field_tag :on, Date.today, :class => "calendar input-small" %>
+                  <div class="input-append date calendar" data-date="<%= Date.today.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+                    <input class="calendar input-small" id="on" name="on" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
                 </div>
               </div>
 
