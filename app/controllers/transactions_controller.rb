@@ -57,7 +57,7 @@ class TransactionsController < ApplicationController
         format.html { redirect_to account_transactions_path(@transaction.account), notice: 'Transaction was successfully created.' }
         format.json { render json: @transaction, status: :created, location: @transaction }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to account_transactions_path(current_user.accounts.expense_accounts.first), notice: 'Transaction could not be added.' }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
