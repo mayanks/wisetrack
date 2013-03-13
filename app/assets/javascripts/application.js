@@ -13,9 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require underscore
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone/black_swan
+//# require underscore
+//# require backbone
+//# require backbone_rails_sync
+//# require backbone_datalink
+//# require backbone/black_swan
+//= require turbolinks
 //= require_tree .
