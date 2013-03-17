@@ -24,4 +24,3 @@ gem "rolify", ">= 3.2.0"
 gem "simple_form", ">= 2.0.3"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "rails-backbone"
-gem "turbolinks"
