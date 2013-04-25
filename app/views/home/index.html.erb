@@ -63,7 +63,6 @@
 
 
     var d1 = [<%= raw(@savings.join(",")) %>];
-		var d2 = [[Date.parse('2013-01-01'), 332434], [Date.parse('2013-02-02'), 834342], [Date.parse('2013-03-03'), 32322], [Date.parse('2013-04-04'), 32222]];
 
     $.plot("#nav", [ d1 ], {xaxis: {mode:"time", timeformat:"%b"}});
 
