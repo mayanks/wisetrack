@@ -21,7 +21,7 @@ class Account < ActiveRecord::Base
   def closing_balance(on = nil)
     on = Date.today unless on
     if self.transactions.count > 0
-      t = Transaction.all(:conditions => ["account_id = ? and date <= ?",self.id,Date.today],
+      t = Transaction.all(:conditions => ["account_id = ? and date <= ?",self.id,on],
                           :limit => 1,
                           :order => "date desc, created_at desc").first
     end
