@@ -10,6 +10,14 @@ class Account < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :transactions, :order => "date, created_at"
 
+  def self.savings_balance(user,on = nil)
+    balance = 0
+    user.accounts.saving_accounts.each do |account| 
+      balance += account.closing_balance(on)
+    end
+    return balance
+  end
+
   def closing_balance(on = nil)
     on = Date.today unless on
     if self.transactions.count > 0

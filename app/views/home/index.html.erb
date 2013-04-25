@@ -2,6 +2,20 @@
 <div class="span6">
   <div class="widget">
     <div class="widget-header">
+      <h3>Net Asset Value </h3>
+    </div>
+
+    <div class="widget-content">
+      <div id="nav" style="height:350px">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="span6">
+  <div class="widget">
+    <div class="widget-header">
       <h3>Category Expenses</h3>
     </div>
 
@@ -46,4 +60,11 @@
 			}
       })
       });
+
+
+    var d1 = [<%= raw(@savings.join(",")) %>];
+		var d2 = [[Date.parse('2013-01-01'), 332434], [Date.parse('2013-02-02'), 834342], [Date.parse('2013-03-03'), 32322], [Date.parse('2013-04-04'), 32222]];
+
+    $.plot("#nav", [ d1 ], {xaxis: {mode:"time", timeformat:"%b"}});
+
 </script>

@@ -1,6 +1,27 @@
 <h1>Editing transaction</h1>
+<%= simple_form_for(@transaction, :html => {:class => "form-horizontal"}) do |f| %>
+    <div>
+      <%= f.error_notification %>
+      <div class="control-group">
+        <%= f.label :date, "Date", :class => "control-label" %>
+        <div class="controls">
+          <div class="input-append date calendar" data-date="<%= @transaction.date.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+            <input class="calendar input-small" id="transaction_date" name="transaction[date]" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+        </div>
+      </div>
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @transaction %> |
-<%= link_to 'Back', transactions_path %>
+      <%= f.input :amount %>
+      <%= f.association :account %>
+      <%= f.input :category do %>
+        <%= f.select :category_id, (@transaction.t_type == Transaction::TYPE_DEBIT) ? expense_category_options : income_categories %>
+      <% end %>
+      <%= f.input :description %>
+    </div>
+
+      <%= f.button :submit, :class => "btn" %>
+  <% end %>
+</div>
+

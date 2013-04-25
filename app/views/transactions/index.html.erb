@@ -199,7 +199,6 @@
     <div id="transactions" class="widget-content">
       <table class="table table-bordered table-stripped">
         <thead>
-          <th>S.No</th>
           <th>Date</th>
           <th>Description</th>
           <th>Category</th>
@@ -207,11 +206,12 @@
           <th>Type</th>
           <th>Amount</th>
           <th>Balance</th>
+          <th></th>
         </tr>
 
+        <%- tc = Category.find_by_name('transfer') -%>
         <% @transactions.each do |transaction| %>
           <tr>
-            <td></td>
             <td><%=l transaction.date %></td>
             <td><%= transaction.description %></td>
             <td><%= transaction.category.category.nil? ? transaction.category.name : transaction.category.category.name %></td>
@@ -225,6 +225,7 @@
             </td>
             <td><%=rs transaction.amount %></td>
             <td><%=rs transaction.balance %></td>
+            <td><%= link_to raw('<i class="icon-edit"></i>'),edit_transaction_path(transaction) if transaction.category != tc%></td>
           </tr>
         <% end %>
       </table>
