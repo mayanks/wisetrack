@@ -5,8 +5,8 @@ class HomeController < ApplicationController
       d = Date.today.beginning_of_month - 6.months
       @savings = []
       0.upto(5) do |i|
-        d += i.months
         @savings << ["[Date.parse('#{d}'),#{Account.savings_balance(current_user,d)}]"]
+        d += 1.month
       end
     end
   end
