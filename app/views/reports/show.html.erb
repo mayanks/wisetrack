@@ -1,0 +1,66 @@
+<h1>Report for <%= @date %></h1>
+Income = <%= @income %></br>
+Expense = <%= @expense %>
+
+<div class="span6">
+  <div class="widget widget-table action-table">
+    <div class="widget-header">
+      <i class="icon-money"></i>
+      <h3>Income</h3>
+    </div>
+
+    <div class="widget-content">
+      <table class="table table-bordered table-stripped">
+        <thead>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Sub Category</th>
+          <th>Amount</th>
+        </tr>
+
+        <% @income_txns.each do |transaction| %>
+          <tr>
+            <td><%=l transaction.date %></td>
+            <td><%= transaction.description %></td>
+            <td><%= transaction.category.category.nil? ? transaction.category.name : transaction.category.category.name %></td>
+            <td><%= transaction.category.name %></td>
+            <td><%=rs transaction.amount %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+ 
+<div class="span6">
+  <div class="widget widget-table action-table">
+    <div class="widget-header">
+      <i class="icon-money"></i>
+      <h3>Expenses</h3>
+    </div>
+
+    <div class="widget-content">
+      <table class="table table-bordered table-stripped">
+        <thead>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Sub Category</th>
+          <th>Amount</th>
+        </tr>
+
+        <% @expense_txns.each do |transaction| %>
+          <tr>
+            <td><%=l transaction.date %></td>
+            <td><%= transaction.description %></td>
+            <td><%= transaction.category.category.nil? ? transaction.category.name : transaction.category.category.name %></td>
+            <td><%= transaction.category.name %></td>
+            <td><%=rs transaction.amount %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+ 
