@@ -6,12 +6,19 @@ class TransactionsController < ApplicationController
     #valid_account_ids = current_user.accounts.map{|a|a.id}
     if params[:account_id]
       @account = current_user.accounts.find(params[:account_id])
+    elsif params[:category_id]
+      @category = Category.find(params[:category_id])
     else
       @account = current_user.accounts.current_accounts.first
     end
 
-    @transactions = Transaction.where(:account_id => @account.id).order("date desc, created_at desc").limit(100)
-    @transaction = Transaction.new(:date => Date.today, :account_id => @account.id)
+    if @account
+      @transactions = Transaction.where(:account_id => @account.id).order("date desc, created_at desc").limit(100)
+      @transaction = Transaction.new(:date => Date.today, :account_id => @account.id)
+    else
+      @transactions = Transaction.where(:category_id => @category.id).order("date desc, created_at desc").limit(100)
+    end
+
     @current_date = Date.today
 
     respond_to do |format|

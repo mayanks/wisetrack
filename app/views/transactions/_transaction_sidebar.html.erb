@@ -1,0 +1,176 @@
+<div class="span3">
+  <div class="widget widget-table">
+    <div class="widget-header">
+      <div class="btn-group">
+        <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+          <%= @account.name %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <% current_user.accounts.all.each do |a| %>
+            <%- next if @account == a -%>
+            <li><%=link_to(a.name,account_transactions_path(a)) %></li>
+          <%- end -%>
+        </ul>
+      </div>
+    </div>
+
+    <div class="widget-content">
+ 
+      <br/>
+      <div class="add-transaction-container">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#add-expense" data-toggle="tab">Expense</a></li>
+          <li><a href="#add-income" data-toggle="tab">Income</a></li>
+          <li><a href="#add-transfer" data-toggle="tab">Transfer</a></li>
+        </ul>
+
+        <div class="tab-content" style="background-color:white;">
+          <div class="tab-pane active" id="add-expense">
+            <h3>Add Expense</h3>
+            <%- @transaction.t_type = Transaction::TYPE_DEBIT -%>
+            <%= form_for(@transaction, {:html => {:class => "form-horizontal side-form"}}) do |f| %>
+              <div class="control-group">
+                <%= f.label :date, "Date", :class => "control-label" %>
+                <div class="controls">
+                  <div class="input-append date calendar" data-date="<%= @transaction.date.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+                    <input class="calendar input-small" id="transaction_date" name="transaction[date]" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :amount, "Amount", :class => "control-label" %>
+                <div class="controls">
+                  <div class="input-prepend">
+                    <span class="add-on">&#8377;</span>
+                    <%= f.text_field :amount, :placeholder => "Amount" , :class => "input-small"%>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :account_id, "Account", :class => "control-label" %>
+                <div class="controls">
+                  <%= f.select :account_id, ["-- From --"] + current_user.accounts.expense_accounts.collect{|p| [p.name, p.id]}, {}, { :class => "input-small"} %>
+                  <%= f.hidden_field :t_type%>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :category_id, "Category", :class => "control-label" %>
+                <div class="controls">
+                  <%= f.select :category_id, ["-- Type --"] + expense_category_options, {}, {:class => "input-small"}%>
+                </div>
+              </div>
+
+              <%= f.text_field :description, :placeholder => "Description" %>
+
+              <div class="form-actions">
+                <%= f.button :submit, :class => "btn btn-info" %>
+              </div>
+            <% end %>
+
+          </div>
+
+
+          <div class="tab-pane" id="add-income">
+            <h3>Add Income</h3>
+            <%- @transaction.t_type = Transaction::TYPE_CREDIT -%>
+            <%= form_for(@transaction, {:html => {:class => "form-horizontal side-form"}}) do |f| %>
+              <div class="control-group">
+                <%= f.label :date, "Date", :class => "control-label" %>
+                <div class="controls">
+                  <div class="input-append date calendar" data-date="<%= @transaction.date.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+                    <input class="calendar input-small" id="transaction_date" name="transaction[date]" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :amount, "Amount", :class => "control-label" %>
+                <div class="controls">
+                  <div class="input-prepend">
+                    <span class="add-on">&#8377;</span>
+                    <%= f.text_field :amount, :placeholder => "Amount" , :class => "input-small"%>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :account_id, "Account", :class => "control-label" %>
+                <div class="controls">
+                  <%= f.select :account_id, ["-- To --"] + current_user.accounts.all.collect{|p| [p.name, p.id]}, {}, { :class => "input-small"} %>
+                  <%= f.hidden_field :t_type%>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :category_id, "Category", :class => "control-label" %>
+                <div class="controls">
+                  <%= f.select :category_id, ["-- Type --"] + Category.income_categories.collect{|p| [p.name.titleize, p.id]} , {}, {:class => "input-small"}%>
+                </div>
+              </div>
+
+              <%= f.text_field :description, :placeholder => "Description" %>
+
+              <div class="form-actions">
+                <%= f.button :submit, :class => "btn btn-info" %>
+              </div>
+            <% end %>
+
+          </div>
+
+
+          <div class="tab-pane" id="add-transfer">
+            <h3>Transfer Funds</h3>
+            <%= form_for(@transaction, {:url => transactions_transfer_path, :html => {:class => "form-horizontal side-form"}}) do |f| %>
+              <div class="control-group">
+                <%= label_tag :on, "Date", :class => "control-label" %>
+                <div class="controls">
+                  <div class="input-append date calendar" data-date="<%= Date.today.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+                    <input class="calendar input-small" id="on" name="on" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= label_tag :amount, "Amount", :class => "control-label" %>
+                <div class="controls">
+                  <div class="input-prepend">
+                    <span class="add-on">&#8377;</span>
+                    <%= text_field_tag :amount, "", :placeholder => "Amount" , :class => "input-small"%>
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :debit_from_id, "Debit From", :class => "control-label" %>
+                <div class="controls">
+                  <%= raw select_tag 'debit_from_id', options_from_collection_for_select(current_user.accounts.all, "id", "name"), {:prompt => "-- From --",:class => "input-small"} %>
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= f.label :credit_to_id, "Credit To", :class => "control-label" %>
+                <div class="controls">
+                  <%= raw select_tag 'credit_to_id', options_from_collection_for_select(current_user.accounts.all, "id", "name"), {:prompt => "-- To --",:class => "input-small"} %>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <%= f.button :submit, :class => "btn btn-info" %>
+              </div>
+            <% end %>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@
                 <i class="badge icon icon-plus"></i>
               </a>
               <%# link_to_function(raw("<i class='badge icon icon-plus'></i>"),"$('.category_#{c.id}').slideToggle('slow');$(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus')") %>
-              <span class="label"><%= c.name %></span> 
+              <%= link_to(c.name,category_transactions_path(c),:class => "label") %>
             </td>
             <td><%=rs c.expense_this_month %></td>
             <td><%=rs c.expense_last_3_months %></td>
@@ -28,7 +28,7 @@
           <tbody id="category_<%=c.id%>" style="display:none;">
             <% c.categories.each do |subc| %>
               <tr>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-info"><%= subc.name %></span> </td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to(subc.name,category_transactions_path(subc), :class => "label label-info") %></td>
                 <td><%=rs subc.expense_this_month %></td>
                 <td><%=rs subc.expense_last_3_months %></td>
                 <td><%=rs subc.expense_this_year %></td>

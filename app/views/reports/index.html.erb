@@ -80,7 +80,7 @@
           <%- end %>
           <%- @categories.each do |cat| -%>
             <tr>
-              <td><%= cat[:cat].name.titleize %></td>
+              <td><%= link_to(cat[:cat].name.titleize, category_transactions_path(cat[:cat])) %></td>
               <%- balance = 0 -%>
               <%- cat[:expense].each do |e| -%>
                 <td><%=rs(e) %></td><%- balance += e %>

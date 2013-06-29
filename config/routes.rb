@@ -1,6 +1,10 @@
 BlackSwan::Application.routes.draw do
   resources :transactions
+  match "/transactions/transfer", :to => "transactions#transfer", :via => :post
   resources :accounts do 
+    resources :transactions
+  end
+  resources :category do
     resources :transactions
   end
   get "/reports/:date" => "reports#show"
@@ -12,6 +16,4 @@ BlackSwan::Application.routes.draw do
   root :to => "home#landing"
   devise_for :users
   resources :users
-  match "/categories", :to => "category#index"
-  match "/transactions/transfer", :to => "transactions#transfer", :via => :post
 end
