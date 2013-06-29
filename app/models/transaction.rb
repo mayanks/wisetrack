@@ -12,4 +12,18 @@ class Transaction < ActiveRecord::Base
   def set_balance
     self.account.update_transactions(self)
   end
+
+  def self.income_for_month(date)
+    start_date = date.beginning_of_month
+    end_date = date.end_of_month
+    exclude_category = Category.find_by_name('transfer')
+    Transaction.sum(:amount, :conditions => ["date >= ? and date <= ? and t_type = 1 and category_id != ? ", start_date, end_date, exclude_category.id])
+  end
+
+  def self.expense_for_month(date)
+    start_date = date.beginning_of_month
+    end_date = date.end_of_month
+    exclude_category = Category.find_by_name('transfer')
+    Transaction.sum(:amount, :conditions => ["date >= ? and date <= ? and t_type = 2 and category_id != ? ", start_date, end_date, exclude_category.id])
+  end
 end

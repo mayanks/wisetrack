@@ -3,6 +3,8 @@ BlackSwan::Application.routes.draw do
   resources :accounts do 
     resources :transactions
   end
+  get "/reports/:date" => "reports#show"
+  get "/reports/" => "reports#index"
 
   authenticated :user do
     root :to => 'home#index'

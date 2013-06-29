@@ -12,6 +12,12 @@ class Category < ActiveRecord::Base
     Category.all(:conditions => ["name != 'income' and name != 'transfer' and category_id is null"], :order => "name")
   end
 
+  def expense_for_month(d)
+    start_date = d.beginning_of_month
+    end_date = d.end_of_month
+    total = self.transactions.sum(:amount, :conditions => ["date >= ? and date <= ? ",start_date, end_date])
+  end
+
   def expenses_since(d)
     total = self.transactions.sum(:amount, :conditions => ["date >= ?",d])
     self.categories.each {|s| total += s.expenses_since(d) }
