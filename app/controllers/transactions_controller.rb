@@ -42,6 +42,7 @@ class TransactionsController < ApplicationController
   # GET /transactions/new.json
   def new
     @transaction = Transaction.new
+    @transaction.date = Date.today
 
     respond_to do |format|
       format.html # new.html.erb
@@ -68,6 +69,10 @@ class TransactionsController < ApplicationController
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def mobile
+    render :layout => 'mobile'
   end
 
   def transfer

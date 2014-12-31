@@ -1,52 +1,72 @@
-<div class="widget widget-table action-table">
-  <div class="widget-header">
-      <i class="icon-briefcase"></i>
-      <h3>Accounts</h3>
-  </div>
+<div class="card">
+  <ul class="table-view">
 
-  <div id="transactions" class="widget-content">
-    <table class="table table-bordered table-stripped">
-      <thead>
-        <th>Name</th>
-        <th>Account Number</th>
-        <th>Branch</th>
-        <th>Account Type</th>
-        <th>Balance</th>
-      </thead>
-      <tbody>
-        <%- balance = 0 %>
-        <tr><td colspan=5>Saving Accounts</td></tr>
-        <%- @saving_accounts.each do |account| -%>
-          <%- balance += account.closing_balance -%>
-          <%= render :partial => "account", :locals => {:account => account} %>
-        <%- end -%>
-        <tr>
-          <td colspan=4><b>Total</b></td>
-          <td><b><%=rs(balance)%></b></td>
-        </tr>
+    <li class="table-view-cell table-view-divider">Savings Account</li>
 
-        <tr><td colspan=5>Debt Accounts</td></tr>
-        <%- @debt_accounts.each do |account| -%>
-          <%- balance += account.closing_balance -%>
-          <%= render :partial => "account", :locals => {:account => account} %>
-        <%- end -%>
-        <tr>
-          <td colspan=4><b>Total</b></td>
-          <td><b><%= rs(balance)%></b></td>
-        </tr>
+    <%- balance = 0 %>
+    <%- @saving_accounts.each do |account| -%>
+      <%- balance += account.closing_balance -%>
+      <li class="table-view-cell">
+      <a class="navigate-right" href="/accounts/<%=account.id%>/transactions" data-ignore="push">
+        <span class="badge <%= (account.closing_balance > 0) ? 'badge-positive' : 'badge-negative'%>"><%= rs account.closing_balance %></span>
+        <%= account.name %>
+      </a>
+      </li>
+    <%- end -%>
 
-        <tr><td colspan=5>Investment Accounts</td></tr>
-        <%- @investment_accounts.each do |account| -%>
-          <%- balance += account.closing_balance -%>
-          <%= render :partial => "account", :locals => {:account => account} %>
-        <%- end -%>
-        <tr>
-          <td colspan=4><b>Total</b></td>
-          <td><b><%=rs(balance)%></b></td>
-        </tr>
+    <li class="table-view-cell table-view-divider">
+    <span class="badge <%= (balance > 0) ? 'badge-positive' : 'badge-negative'%>"><%= rs balance %></span>
+    Total
+    </li>
 
-      </tbody>
-    </table>
-  </div>
+  </ul>
 </div>
- 
+
+<div class="card">
+  <ul class="table-view">
+
+    <li class="table-view-cell table-view-divider">Debt Account</li>
+
+    <%- @debt_accounts.each do |account| -%>
+      <%- balance += account.closing_balance -%>
+      <li class="table-view-cell">
+      <a class="navigate-right" href="/accounts/<%=account.id%>/transactions" data-ignore="push">
+        <span class="badge <%= (account.closing_balance > 0) ? 'badge-positive' : 'badge-negative'%>"><%= rs account.closing_balance %></span>
+        <%= account.name %>
+      </a>
+      </li>
+    <%- end -%>
+
+    <li class="table-view-cell table-view-divider">
+    <span class="badge <%= (balance > 0) ? 'badge-positive' : 'badge-negative'%>"><%= rs balance %></span>
+    Total
+    </li>
+
+  </ul>
+</div>
+
+
+<div class="card">
+  <ul class="table-view">
+
+    <li class="table-view-cell table-view-divider">Investment Account</li>
+
+    <%- @investment_accounts.each do |account| -%>
+      <%- balance += account.closing_balance -%>
+      <li class="table-view-cell">
+      <a class="navigate-right" href="/accounts/<%=account.id%>/transactions" data-ignore="push">
+        <span class="badge <%= (account.closing_balance > 0) ? 'badge-positive' : 'badge-negative'%>"><%= rs account.closing_balance %></span>
+        <%= account.name %>
+      </a>
+      </li>
+    <%- end -%>
+
+    <li class="table-view-cell table-view-divider">
+    <span class="badge <%= (balance > 0) ? 'badge-positive' : 'badge-negative'%>"><%= rs balance %></span>
+    Total
+    </li>
+
+  </ul>
+</div>
+
+

@@ -1,4 +1,5 @@
 BlackSwan::Application.routes.draw do
+  match "/transactions/m", :to => "transactions#mobile", :via => :get
   resources :transactions
   match "/transactions/transfer", :to => "transactions#transfer", :via => :post
   resources :accounts do 

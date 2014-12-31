@@ -1,0 +1,56 @@
+<div class="segmented-control">
+  <a class="control-item active" href="#item1mobile">
+    Expense
+  </a>
+  <a class="control-item" href="#item2mobile">
+    Income
+  </a>
+  <a class="control-item" href="#item3mobile">
+    Transfer
+  </a>
+</div>
+<div class="card">
+  <div id="item1mobile" class="control-content active content-padded">
+    <h3>Add Expense</h3>
+    <%- @transaction.t_type = Transaction::TYPE_DEBIT -%>
+    <%= form_for(@transaction, {:html => {:class => "input-group"}}) do |f| %>
+      <div class="input-row">
+        <%= f.label :date, "Date", :class => "control-label" %>
+          <!--
+          <div class="input-append date calendar" data-date="<%= @transaction.date.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+            <input class="calendar input-small" id="transaction_date" name="transaction[date]" type="text" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" readonly>
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+          <input class="input-small" id="transaction_date" name="transaction[date]" type="date" value="<%= @transaction.date.strftime("%d-%m-%Y") %>" >
+          -->
+          <%= f.date_select :date,{},:class => "date" %>
+      </div>
+
+      <div class="input-row">
+        <%= f.label :amount, "Amount", :class => "control-label" %>
+        <%= f.text_field :amount, :placeholder => "Amount" , :class => "input-small"%>
+      </div>
+
+      <div class="input-row">
+        <%= f.label :account_id, "Account", :class => "control-label" %>
+        <%= f.select :account_id, ["-- From --"] + current_user.accounts.expense_accounts.collect{|p| [p.name, p.id]}, {}, { :class => "input-small"} %>
+        <%= f.hidden_field :t_type%>
+      </div>
+
+      <div class="input-row">
+        <%= f.label :category_id, "Category", :class => "control-label" %>
+        <%= f.select :category_id, ["-- Type --"] + expense_category_options, {}, {:class => "input-small"}%>
+      </div>
+
+      <%= f.text_field :description, :placeholder => "Description" %>
+
+      <div class="form-actions">
+        <%= f.button :submit, :class => "btn btn-positive btn-block" %>
+      </div>
+    <% end %>
+
+
+  </div>
+  <span id="item2mobile" class="control-content">Item 2</span>
+  <span id="item3mobile" class="control-content">Item 3</span>
+</div>

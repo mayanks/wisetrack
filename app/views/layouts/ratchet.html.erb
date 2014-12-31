@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ratchet template page</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <!--link href="ratchet.css" rel="stylesheet" -->
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <!-- Include the compiled Ratchet JS -->
+    <!-- script src="ratchet.js"></script-->
+    <%= javascript_include_tag "application" %>
+  </head>
+  <body>
+
+    <!-- Make sure all your bars are the first things in your <body> -->
+      <!--<div id="popover" class="popover">
+        <header class="bar bar-nav">
+        <h1 class="title">Popover title</h1>
+        </header>
+        <ul class="table-view">
+          <li class="table-view-cell">Item1</li>
+          <li class="table-view-cell">Item2</li>
+          <li class="table-view-cell">Item3</li>
+          <li class="table-view-cell">Item4</li>
+          <li class="table-view-cell">Item5</li>
+          <li class="table-view-cell">Item6</li>
+          <li class="table-view-cell">Item7</li>
+          <li class="table-view-cell">Item8</li>
+        </ul>
+      </div> -->
+
+
+      <header class="bar bar-nav">
+      <%- if user_signed_in? -%>
+        <a class="icon icon-edit pull-left" href="/transactions/new" data-ignore="push"></a>
+        <%= link_to 'Logout', destroy_user_session_path, :method => 'delete', :class => "btn pull-right", 'data-ignore' => "push" %>
+      <%- else -%>
+        <%= link_to 'Login', new_user_session_path, :class => "btn pull-right", 'data-ignore' => "push" %>  
+      <%- end -%>
+      <h1 class="title">Wisetrack</h1>
+    </header>
+
+        <%- if user_signed_in? -%>
+    <nav class="bar bar-tab">
+  <a class="tab-item active" href="/" data-ignore="push">
+    <span class="icon icon-dashboard"></span>
+    <span class="tab-label">Home</span>
+  </a>
+  <a class="tab-item" href="/accounts" data-ignore="push">
+    <span class="icon icon-person"></span>
+    <span class="tab-label">Accounts</span>
+  </a>
+  <a class="tab-item" href="/transactions" data-ignore="push">
+    <span class="icon icon-money"></span>
+    <span class="tab-label">Transactions</span>
+  </a>
+  <a class="tab-item" href="/category" data-ignore="push">
+    <span class="icon icon-list"></span>
+    <span class="tab-label">Categories</span>
+  </a>
+  <a class="tab-item" href="/reports" data-ignore="push">
+    <span class="icon icon-bar-chart"></span>
+    <span class="tab-label">Reports</span>
+  </a>
+  </nav>
+<%- end -%>
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+
+      <%= yield %>
+
+    </div>
+
+
+  </body>
+</html>
